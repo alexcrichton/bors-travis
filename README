@@ -1,0 +1,32 @@
+# Layout
+
+list
+trigger.sh
+add-repo.sh
+
+	The first file is a newline-seprated list of all repositories that we
+	know about. This is used to generate the HTML page and restart all the
+	jobs each night.
+
+public/travis.html
+public/travis.css
+public/list.js
+
+	The html/css files are static and should be edited. The JS file is
+	generated from `list` above by the `gen-list.py` script.
+
+# Add a new repository
+
+	./add-repo.sh repo-owner/repo-name
+
+This will add to `list` and regenerate `public/list.js`
+
+# Trigger new builds
+
+	./trigger.sh
+
+This is also run in a cron job
+
+# Dependencies
+
+The `travis` command needs to be installed through rubygems.

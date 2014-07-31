@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CI status</title>
+    <link rel="stylesheet" type="text/css" href="travis.css" />
+</head>
+<body>
+	<div id='list'>
+	</div>
+    <script type="text/javascript" src="list.js"></script>
+    <script type="text/javascript">
+        var div = document.getElementById("list");
+	for (var i = 0; i < repos.length; i++) {
+		var repo = repos[i];
+		var a = document.createElement('a');
+		a.href = 'https://travis-ci.org/' + repo;
+		a.innerHTML = "<div class='name'>" + repo + "</div> <img src='https://travis-ci.org/" + repo + ".svg'/>";
+                a.className = 'repo';
+		a.id = repo.replace('/', '-');
+		div.appendChild(a);
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = 'https://api.travis-ci.org/repositories/' + repo + '.json?callback=update_repo';
+		script.async = true;
+		div.appendChild(script);
+	}
+
+	function update_repo(repo) {
+		console.log(repo);
+		var row = document.getElementById(repo.slug.replace('/', '-'));
+		if (repo.last_build_status == 0) {
+			row.className = 'repo passed';
+		} else if (repo.last_build_status == 1) {
+			row.className = 'repo failed';
+		} else if (repo.last_build_started_at != null) {
+			row.className = 'repo running';
+		} else {
+			row.className = 'repo unknown';
+		}
+		var time = document.createElement('div');
+		time.className = 'time';
+		var mydate;
+		if (repo.last_build_started_at != null) {
+			mydate = new Date(repo.last_build_started_at);
+		} else {
+			mydate = new Date(repo.last_build_finished_at);
+		}
+		time.innerHTML = 'last built: ' + mydate.toLocaleString();
+		row.appendChild(time);
+	}
+    </script>
+</body>
+</html>

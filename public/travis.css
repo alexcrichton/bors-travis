@@ -1,0 +1,38 @@
+body { margin: 0; padding: 0; }
+
+#list { width: 100%; }
+
+a.repo {
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid black;
+	font-size: 120%;
+	text-decoration: none;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+a.repo .name {
+	padding: 10px;
+	padding-left: 50px;
+	display: inline-block;
+	font-weight: bold;
+}
+
+a.repo .time {
+	padding: 10px;
+	display: inline-block;
+	font-size: 70%;
+	float: right;
+	margin-right: 20px;
+}
+
+a.passed { background: #b1fbb1; color: #008000; }
+a.failed { background: #feadad; color: #9c0000; }
+a.unknown { background: #d4d4d4; color: black; }
+a.running { background: #fffea1; color: #747400; }
+
+a.repo img {
+	padding: 10px;
+	float: right;
+	margin-right: 50px;
+}
