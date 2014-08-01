@@ -15,13 +15,13 @@
 		var repo = repos[i];
 		var a = document.createElement('a');
 		a.href = 'https://travis-ci.org/' + repo;
-		a.innerHTML = "<div class='name'>" + repo + "</div> <img src='https://travis-ci.org/" + repo + ".svg'/>";
+		a.innerHTML = "<div class='name'>" + repo + "</div> <img src='https://travis-ci.org/" + repo + ".svg?branch=master'/>";
                 a.className = 'repo';
 		a.id = repo.replace('/', '-');
 		div.appendChild(a);
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
-		script.src = 'https://api.travis-ci.org/repositories/' + repo + '.json?callback=update_repo';
+		script.src = 'https://api.travis-ci.org/repositories/' + repo + '.json?callback=update_repo&branch=master';
 		script.async = true;
 		div.appendChild(script);
 	}
